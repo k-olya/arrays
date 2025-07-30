@@ -36,13 +36,14 @@ class NumberLine extends Array {
     // минимальный положительный элемент
     Object.defineProperty(this, "наименьшее > 0", {
       get() {
-        try {
-          // фильтруем положительные элементы и ищем среди них минимум
-          return this.filter((x) => x > 0).reduce((a, b) => Math.min(a, b));
-        } catch (e) {
-          // reduce вернет ошибку и catch выполнится, если в строке нет положительных элементов
+        // фильтр положительных элементов
+        const positive = this.filter((x) => x > 0);
+        // вернуть undefined, если положительных нет
+        if (!positive.length) {
           return undefined;
         }
+        // поиск минимума среди положительных элементов
+        return Math.min(...positive);
       },
       enumerable: true,
     });
