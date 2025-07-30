@@ -20,7 +20,9 @@ class NumberLine extends Array {
     super(...args);
 
     // сразу обновить минимум
-    this.updateMinimum(...args);
+    for (let item of args) {
+      NumberLine.minimum = Math.min(item, NumberLine.minimum);
+    }
 
     // содержит ли строка минимум
     // если минимум есть в нескольких строках, каждая вернет "*"
@@ -75,22 +77,12 @@ class NumberLine extends Array {
       enumerable: true,
     });
   }
-  // обновить минимум, если требуется
-  updateMinimum(...args) {
-    for (let item of args) {
-      NumberLine.minimum = Math.min(item, NumberLine.minimum);
-    }
-  }
-  // метод push сразу считает минимум
-  push(...args) {
-    this.updateMinimum(...args);
-    return super.push(...args);
-  }
   // инициализация случайными числами
   create() {
     for (let i = 0; i < W; i++) {
       const item = randInt();
       this.push(item);
+      NumberLine.minimum = Math.min(item, NumberLine.minimum);
     }
     return this;
   }
