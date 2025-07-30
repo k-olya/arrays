@@ -82,6 +82,7 @@ class NumberLine extends Array {
     for (let i = 0; i < W; i++) {
       const item = randInt();
       this.push(item);
+      // обновление минимума
       NumberLine.minimum = Math.min(item, NumberLine.minimum);
     }
     return this;
